@@ -16,6 +16,7 @@ package org.openmrs.mobile.activities.dashboard;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import org.openmrs.mobile.R;
 import org.openmrs.mobile.activities.ACBaseActivity;
@@ -47,6 +48,7 @@ public class DashboardActivity extends ACBaseActivity {
         */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        Log.d("helaaa","DashBoard");
 
         // Create toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

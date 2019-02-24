@@ -42,6 +42,8 @@ import org.openmrs.mobile.activities.syncedpatients.SyncedPatientsActivity;
 import org.openmrs.mobile.utilities.FontsUtil;
 import org.openmrs.mobile.utilities.ImageUtils;
 
+import static org.openmrs.mobile.R.id.registryPatientView;
+
 public class DashboardFragment extends ACBaseFragment<DashboardContract.Presenter> implements DashboardContract.View, View.OnClickListener {
 
     // ImageView Buttons
@@ -139,7 +141,7 @@ public class DashboardFragment extends ACBaseFragment<DashboardContract.Presente
     }
 
     private void showOverlayTutorialThree() {
-        Target viewTarget = new ViewTarget(R.id.registryPatientView, this.getActivity());
+        Target viewTarget = new ViewTarget(registryPatientView, this.getActivity());
         new ShowcaseView.Builder(this.getActivity())
                 .setTarget(viewTarget)
                 .setContentTitle("Register Patient")
@@ -224,7 +226,7 @@ public class DashboardFragment extends ACBaseFragment<DashboardContract.Presente
         mActiveVisitsButton = (ImageView) root.findViewById(R.id.activeVisitsButton);
         mCaptureVitalsButton = (ImageView) root.findViewById(R.id.captureVitalsButton);
         mFindPatientView = (RelativeLayout) root.findViewById(R.id.findPatientView);
-        mRegistryPatientView = (RelativeLayout) root.findViewById(R.id.registryPatientView);
+        mRegistryPatientView = (RelativeLayout) root.findViewById(registryPatientView);
         mCaptureVitalsView = (RelativeLayout) root.findViewById(R.id.captureVitalsView);
         mActiveVisitsView = (RelativeLayout) root.findViewById(R.id.activeVisitsView);
     }
@@ -308,7 +310,7 @@ public class DashboardFragment extends ACBaseFragment<DashboardContract.Presente
             case R.id.findPatientView:
                 startNewActivity(SyncedPatientsActivity.class);
                 break;
-            case R.id.registryPatientView:
+            case registryPatientView:
                 startNewActivity(AddEditPatientActivity.class);
                 break;
             case R.id.captureVitalsView:

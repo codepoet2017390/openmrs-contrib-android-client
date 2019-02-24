@@ -34,9 +34,11 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -627,14 +629,17 @@ public class AddEditPatientFragment extends ACBaseFragment<AddEditPatientContrac
 
                         if (which == 0)
                             AddEditPatientFragmentPermissionsDispatcher.capturePhotoWithCheck(AddEditPatientFragment.this);
+
                         else {
                             Intent i;
                             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT)
                                 i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                             else
-                                i = new Intent(Intent.ACTION_GET_CONTENT);
-                            i.addCategory(Intent.CATEGORY_OPENABLE);
-                            i.setType("image/*");
+//                                i = new Intent(Intent.ACTION_GET_CONTENT);
+//                            i.addCategory(Intent.CATEGORY_OPENABLE);
+//                            i.setType("image/*");
+                                Log.d("helaaa","Im heree");
+                             i = new Intent("android.media.action.IMAGE_CAPTURE");
                             startActivityForResult(i, GALLERY_IMAGE_REQUEST);
                         }
                     }
@@ -681,10 +686,14 @@ public class AddEditPatientFragment extends ACBaseFragment<AddEditPatientContrac
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
             output = new File(dir, getUniqueImageFileName());
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(output));
+            Log.d("helaaaa","Yeah baby");
+            Uri photoURI = FileProvider.getUriForFile(getContext(),
+                    "com.example.android.fileprovider",
+                    output);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, IMAGE_REQUEST);
         }
-    }
+     }
 
     @OnShowRationale({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void showRationaleForCamera(final PermissionRequest request) {
